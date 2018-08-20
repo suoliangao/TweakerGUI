@@ -1,0 +1,13 @@
+item.recipe_maker.name=配方制作器
+
+recipe_maker.crafting_table=工作台配方
+
+btn.basic_mode=基础模式
+btn.advanced_mode=高级模式
+btn.generate=生成脚本
+
+msg.open_recipemakergui_fail=无法制作该方块的配方
+msg.generate_fail=无法生成脚本
+msg.generate_success=脚本已生成并复制到剪贴板
+
+txt.unfinished_function=此功能尚未完成

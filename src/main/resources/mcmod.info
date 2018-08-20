@@ -1,0 +1,16 @@
+[
+{
+  "modid": "tweakergui",
+  "name": "Tweaker GUI",
+  "description": "Added in-game GUI screen to edit CraftTweaker recipes.",
+  "version": "0.1 alpha",
+  "mcversion": "${mcversion}",
+  "url": "https://tieba.baidu.com/p/5843288555",
+  "updateUrl": "https://tieba.baidu.com/p/5843288555",
+  "authorList": ["SuoLianGao"],
+  "credits": "Mojang AB, Minecraft Forge, all the online tutorial makers.",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]
