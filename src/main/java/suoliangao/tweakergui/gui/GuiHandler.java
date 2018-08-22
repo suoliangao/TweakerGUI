@@ -7,8 +7,6 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import suoliangao.tweakergui.TweakerGUI;
 
 import suoliangao.tweakergui.gui.minecraft.*;
-import suoliangao.tweakergui.gui.minecraft.ContainerCraftingTable;
-import suoliangao.tweakergui.gui.minecraft.GuiCraftingTable;
 
 public class GuiHandler implements IGuiHandler {
 	
@@ -24,10 +22,10 @@ public class GuiHandler implements IGuiHandler {
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		switch (ID) {
-		case 0:
+		case CRAFTING_TABLE:
 			return new ContainerCraftingTable(player.inventory);
-		case 1:
-			return null;
+		case FURNACE:
+			return new ContainerFurnace(player.inventory);
 		default:
 			return null;
 		}
@@ -37,10 +35,10 @@ public class GuiHandler implements IGuiHandler {
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
 		// TODO Auto-generated method stub
 		switch (ID) {
-		case 0:
+		case CRAFTING_TABLE:
 			return new GuiCraftingTable(new ContainerCraftingTable(player.inventory));
-		case 1:
-			return null;
+		case FURNACE:
+			return new GuiFurnace(new ContainerFurnace(player.inventory));
 		default:
 			return null;
 		}

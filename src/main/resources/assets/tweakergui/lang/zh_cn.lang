@@ -1,6 +1,7 @@
 item.recipe_maker.name=配方制作器
 
 recipe_maker.crafting_table=工作台配方
+recipe_maker.furnace=熔炉配方
 
 btn.basic_mode=基础模式
 btn.advanced_mode=高级模式
@@ -11,3 +12,5 @@ msg.generate_fail=无法生成脚本
 msg.generate_success=脚本已生成并复制到剪贴板
 
 txt.unfinished_function=此功能尚未完成
+txt.fuel_burning_time=燃烧时间
+txt.furnace_xp=经验:

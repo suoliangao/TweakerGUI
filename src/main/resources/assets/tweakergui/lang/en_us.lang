@@ -1,6 +1,7 @@
 item.recipe_maker.name=Redipe Maker
 
 recipe_maker.crafting_table=Crafting Table Redipe
+recipe_maker.furnace=Furnace Recipe
 
 btn.basic_mode=Basic Mode
 btn.advanced_mode=Advanced Mode
@@ -11,3 +12,5 @@ msg.generate_fail=Fail to generate script.
 msg.generate_success=The generated script has been copied to your clipboard.
 
 txt.unfinished_function=Not available yet XD
+txt.fuel_burning_time=Burning Time
+txt.furnace_xp=xp:

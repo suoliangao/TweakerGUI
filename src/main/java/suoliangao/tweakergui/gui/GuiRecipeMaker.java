@@ -27,6 +27,8 @@ public abstract class GuiRecipeMaker extends GuiContainer{
 	protected GuiButton btnSwitchCommand;
 	protected GuiButton btnGenerate;
 	
+	protected GuiAdvancedItemSetting advancedItemSetting;
+	
 	protected RecipeEditMode editMode = RecipeEditMode.Basic;
 	protected String commandName = "NO COMMAND!";
 	
@@ -34,6 +36,17 @@ public abstract class GuiRecipeMaker extends GuiContainer{
 		super(inventorySlotsIn);
 		container = (ContainerRecipeMaker) inventorySlotsIn;
 		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public void initGui() {
+		// TODO Auto-generated method stub
+		super.initGui();
+		int btnStartX = this.width / 2 - this.getXSize() / 2;
+		int btnStartY = this.height / 2 + this.getYSize() / 2;
+		this.addDefaultButtons();
+		advancedItemSetting = new GuiAdvancedItemSetting(this.itemRender, this.fontRenderer, 3, this.getYSize() / 2 - 3, this.getXSize() - 6, this.getYSize() - 6);
+		this.commandName = this.getContainer().getRecipeMakerInventory().getRecipe().getCommand();
 	}
 	
 	public void switchMode (RecipeEditMode mode) {

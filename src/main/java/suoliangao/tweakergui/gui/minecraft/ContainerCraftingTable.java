@@ -9,16 +9,16 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import suoliangao.tweakergui.gui.ContainerRecipeMaker;
-import suoliangao.tweakergui.gui.SlotCanHide;
-import suoliangao.tweakergui.gui.SlotMark;
+import suoliangao.tweakergui.gui.slot.SlotCanHide;
+import suoliangao.tweakergui.gui.slot.SlotMark;
 import suoliangao.tweakergui.inventory.*;
-import suoliangao.tweakergui.inventory.minecraft.InventoryCraftingTable;
+import suoliangao.tweakergui.inventory.minecraft.CraftingTableInventory;
 
 public class ContainerCraftingTable extends ContainerRecipeMaker {
 	
 	public ContainerCraftingTable (InventoryPlayer inventory) {
 		super (inventory);
-		this.recipeMakerInventory = new InventoryCraftingTable();
+		this.recipeMakerInventory = new CraftingTableInventory();
 		
 		for (int i = 0; i < 3; ++i)
         {
@@ -27,27 +27,8 @@ public class ContainerCraftingTable extends ContainerRecipeMaker {
                 this.addSlotToContainer(new SlotMark(recipeMakerInventory, j + i * 3, 30 + j * 18, 17 + i * 18, false));
             }
         }
-		
 		this.addSlotToContainer(new SlotMark(recipeMakerInventory, 9, 124, 35, true));
-
-        for (int k = 0; k < 3; ++k)
-        {
-            for (int i1 = 0; i1 < 9; ++i1)
-            {
-                this.addSlotToContainer(new SlotCanHide(inventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18));
-            }
-        }
-
-        for (int l = 0; l < 9; ++l)
-        {
-            this.addSlotToContainer(new SlotCanHide(inventory, l, 8 + l * 18, 142));
-        }
-	}
-	
-	@Override
-	public boolean canInteractWith(EntityPlayer playerIn) {
-		// TODO Auto-generated method stub
-		return true;
+		this.addPlayerInventorySlots();
 	}
 	
 	@Override

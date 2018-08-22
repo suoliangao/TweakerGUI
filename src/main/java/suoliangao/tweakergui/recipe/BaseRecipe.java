@@ -4,23 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
-import suoliangao.tweakergui.util.StackWarpper;
+import suoliangao.tweakergui.item.StackWrapper;
 
 public abstract class BaseRecipe {
 	
 	protected List<String> commands = new ArrayList<String> ();
-	protected List<StackWarpper> inputs;
-	protected List<StackWarpper> outputs;
 	
 	protected int cmdIndex = -1;
-	
-	public List<StackWarpper> getInputs () {
-		return inputs;
-	}
-	
-	public List<StackWarpper> getOutputs () {
-		return outputs;
-	}
 	
 	public String nextCommand () {
 		if (commands.isEmpty())
@@ -35,10 +25,10 @@ public abstract class BaseRecipe {
 			return "NO COMMAND!";
 		return commands.get(cmdIndex);
 	}
-	protected abstract boolean velidateRecipe ();
-	public abstract String getScript ();
+	
 	public abstract ItemStack getStack (int index);
 	public abstract void setStack (int index, ItemStack stack);
-	
-	
+	public abstract StackWrapper getStackWrapper(int index);
+	protected abstract boolean velidateRecipe ();
+	public abstract String getScript ();
 }

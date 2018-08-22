@@ -16,25 +16,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.BossInfo.Color;
 import net.minecraftforge.fml.client.config.GuiCheckBox;
+import suoliangao.tweakergui.gui.GuiAdvancedItemSetting;
 import suoliangao.tweakergui.gui.GuiRecipeMaker;
 import suoliangao.tweakergui.gui.RecipeEditMode;
+import suoliangao.tweakergui.item.StackWrapper;
 
 public class GuiCraftingTable extends GuiRecipeMaker{
+	
+
 	
 	public GuiCraftingTable(Container inventorySlotsIn) {
 		super(inventorySlotsIn);
 		// TODO Auto-generated constructor stub
 		
-	}
-
-	@Override
-	public void initGui() {
-		// TODO Auto-generated method stub
-		super.initGui();
-		int btnStartX = this.width / 2 - this.getXSize() / 2;
-		int btnStartY = this.height / 2 + this.getYSize() / 2;
-		this.addDefaultButtons();
-		this.commandName = this.getContainer().getRecipeMakerInventory().getRecipe().getCommand();
 	}
 	
 	@Override
@@ -59,14 +53,9 @@ public class GuiCraftingTable extends GuiRecipeMaker{
 			drawRect(3, getYSize () / 2, getXSize() - 3, getYSize() - 6, 0xFFC6C6C6);
 			if(getContainer().getSelectedSlot() != null) {
 				this.RenderSlotFrame(getContainer().getSelectedSlot());
-				ItemStack stack = getContainer().getSelectedSlot().getStack().copy();
-				stack.setCount(1);
-		        RenderHelper.enableGUIStandardItemLighting();
-				this.itemRender.renderItemAndEffectIntoGUI (stack, 5, getYSize () / 2 + 5);
-				String str = I18n.format("txt.unfinished_function");
-				this.fontRenderer.drawString(str, this.getXSize() / 2 - this.fontRenderer.getStringWidth(str) / 2, this.getYSize() / 4 * 3, 0xFFFF3333);
+				StackWrapper stackWrapper = getContainer().getSelectedSlot().getStackWrapper();
+				advancedItemSetting.drawAdvancedItemSetting(stackWrapper);
 			}
-			
 			break;
 		}
 	}

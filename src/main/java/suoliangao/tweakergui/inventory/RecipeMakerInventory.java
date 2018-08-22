@@ -6,6 +6,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
+import suoliangao.tweakergui.item.StackWrapper;
 import suoliangao.tweakergui.recipe.BaseRecipe;
 
 public abstract class RecipeMakerInventory implements IInventory {
@@ -27,6 +28,11 @@ public abstract class RecipeMakerInventory implements IInventory {
 	
 	public void setTitle (String title) {
 		this.unlocalizedTitle = title;
+	}
+	
+	public StackWrapper getStackWrapper(int index) {
+		// TODO Auto-generated method stub
+		return recipe.getStackWrapper (index);
 	}
 		
 	//IInventory
@@ -118,5 +124,11 @@ public abstract class RecipeMakerInventory implements IInventory {
 	public int getFieldCount() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

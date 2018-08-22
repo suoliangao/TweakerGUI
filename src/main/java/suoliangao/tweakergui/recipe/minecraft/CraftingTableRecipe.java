@@ -5,8 +5,8 @@ import java.util.List;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
+import suoliangao.tweakergui.item.StackWrapper;
 import suoliangao.tweakergui.recipe.BaseRecipe;
-import suoliangao.tweakergui.util.StackWarpper;
 
 public class CraftingTableRecipe extends BaseRecipe {
 
@@ -15,9 +15,12 @@ public class CraftingTableRecipe extends BaseRecipe {
 	public static final int REMOVE_SHAPED = 2;
 	public static final int REMOVE_SHAPELESS = 3;
 	
+	private List<StackWrapper> inputs;
+	private StackWrapper output;
+	
 	public CraftingTableRecipe () {
-		inputs = NonNullList.<StackWarpper>withSize(9, StackWarpper.EMPTY);
-		outputs = NonNullList.<StackWarpper>withSize(1, StackWarpper.EMPTY);
+		inputs = NonNullList.<StackWrapper>withSize(9, StackWrapper.EMPTY);
+		output = StackWrapper.EMPTY;
 		commands.add("addShaped");
 		commands.add("addShapeless");
 		commands.add("removeShaped");
@@ -28,32 +31,55 @@ public class CraftingTableRecipe extends BaseRecipe {
 		if (index >= 0 && index < 9)
 			return this.inputs.get(index).getStack();
 		if (index == 9)
-			return this.outputs.get(0).getStack();
+			return this.output.getStack();
 		return ItemStack.EMPTY;
 	}
 	
 	public void setStack (int index, ItemStack stack) {
 		if (index >= 0 && index < 9)
-			this.inputs.set(index, new StackWarpper (stack));
+			this.inputs.set(index, new StackWrapper (stack));
 		else if (index == 9)
-			this.outputs.set(0, new StackWarpper (stack));
+			this.output.setStack(stack);
+	}
+	
+	public StackWrapper getStackWrapper (int index) {
+		if (index >= 0 && index < 9)
+			return this.inputs.get(index);
+		if (index == 9)
+			return this.output;
+		return StackWrapper.EMPTY;
 	}
 	
 	@Override
 	protected boolean velidateRecipe() {
 		// TODO Auto-generated method stub
-		String str = "";
+		boolean velidate = true;
+		int i;
 		switch (cmdIndex) {
 		case ADD_SHAPED:
-			return !inputs.isEmpty() && !outputs.isEmpty();
+			i = 0;
+			for (StackWrapper sw : inputs) {
+				if (sw.getStack().isEmpty())
+					i++;
+			}
+			if (i > 8)
+				return false;
+			return !output.getStack().isEmpty();
 		case ADD_SHAPELESS:
-			return !inputs.isEmpty() && !outputs.isEmpty();
+			i = 0;
+			for (StackWrapper sw : inputs) {
+				if (sw.getStack().isEmpty())
+					i++;
+			}
+			if (i > 8)
+				return false;
+			return !output.getStack().isEmpty();
 		case REMOVE_SHAPED:
-			return !outputs.isEmpty();
+			return !output.getStack().isEmpty();
 		case REMOVE_SHAPELESS:
-			return !outputs.isEmpty();
+			return !output.getStack().isEmpty();
 		}
-		return false;
+		return velidate;
 	}
 
 	@Override
@@ -65,18 +91,18 @@ public class CraftingTableRecipe extends BaseRecipe {
 		switch (cmdIndex) {
 		case ADD_SHAPED:
 			System.out.println("Making String");
-			str = outputs.get(0).toString(true) + ", \n"
+			str = output.toString(true) + ", \n"
 					+ "[[" + inputs.get(0).toString() + ", " + inputs.get(1).toString() + ", " + inputs.get(2).toString() + "]\n"
 					+ "[" +  inputs.get(3).toString() + ", " + inputs.get(4).toString() + ", " + inputs.get(5).toString() + "]\n"
 					+ "[" + inputs.get(6).toString() + ", " + inputs.get(7).toString() + ", " + inputs.get(8).toString() + "]]";
 			return String.format("recipes.addShaped(\"%s\", %s);", "auto_gen_" + str.hashCode(), str);
 		case ADD_SHAPELESS:
 			List<String> in = new ArrayList<String>();
-			for (StackWarpper sw : inputs) {
+			for (StackWrapper sw : inputs) {
 				if (!sw.getStack().isEmpty())
 					in.add(sw.toString());
 			}
-			str = outputs.get(0).toString(true);
+			str = output.toString(true);
 			str = str + ", [";
 			for (int i = 0; i < in.size(); i++) {
 				str = str + in.get(i);
@@ -86,7 +112,7 @@ public class CraftingTableRecipe extends BaseRecipe {
 			str = str + "]";
 			return String.format("recipes.addShapeless(\"%s\", %s);", "auto_gen_" + str.hashCode(), str);
 		case REMOVE_SHAPED:
-			str = outputs.get(0).toString();
+			str = output.toString();
 			if (!inputs.isEmpty())
 				str = str + ", \n"
 					+ "[[" + inputs.get(0).toString() + ", " + inputs.get(1).toString() + ", " + inputs.get(2).toString() + "]\n"
@@ -94,10 +120,10 @@ public class CraftingTableRecipe extends BaseRecipe {
 					+ "[" + inputs.get(6).toString() + ", " + inputs.get(7).toString() + ", " + inputs.get(8).toString() + "]]";
 			return String.format("recipes.removeShaped(%s);", str);
 		case REMOVE_SHAPELESS:
-			str = outputs.get(0).toString();
+			str = output.toString();
 			if (!inputs.isEmpty()) {
 				List<String> strs = new ArrayList<String>();
-				for (StackWarpper sw : inputs) {
+				for (StackWrapper sw : inputs) {
 					if (!sw.getStack().isEmpty())
 						strs.add(sw.toString());
 				}

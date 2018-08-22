@@ -7,6 +7,8 @@ import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import suoliangao.tweakergui.gui.slot.SlotCanHide;
+import suoliangao.tweakergui.gui.slot.SlotMark;
 import suoliangao.tweakergui.inventory.RecipeMakerInventory;
 import suoliangao.tweakergui.util.StackUtil;
 
@@ -44,7 +46,28 @@ public abstract class ContainerRecipeMaker extends Container {
 		}
 		return super.slotClick(slotId, dragType, clickTypeIn, player);
 	}
+	
+	/**
+	 * Add Player Inventory Slots to the Container.
+	 */
+	protected void addPlayerInventorySlots () {
+        for (int k = 0; k < 3; ++k)
+        {
+            for (int i1 = 0; i1 < 9; ++i1)
+            {
+                this.addSlotToContainer(new SlotCanHide(this.player.inventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18));
+            }
+        }
 
+        for (int l = 0; l < 9; ++l)
+        {
+            this.addSlotToContainer(new SlotCanHide(this.player.inventory, l, 8 + l * 18, 142));
+        }
+	}
+	
+	/** 
+	 * Change the recipe edit mode to <b>mode</b>
+	 */
 	public void switchMode (RecipeEditMode mode) {
 		switch (mode) {
 		case Basic:
@@ -73,6 +96,7 @@ public abstract class ContainerRecipeMaker extends Container {
 	public SlotMark getSelectedSlot () {
 		return selectedSlot;
 	}
+	
 	//private methods
 	/**
 	 * This method contains the click behavior when click the Mark Slot in Basic edit mode.
