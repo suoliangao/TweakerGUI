@@ -1,14 +1,14 @@
-item.recipe_maker.name=Redipe Maker
+item.recipe_maker.name=Recipe Maker
 
-recipe_maker.crafting_table=Crafting Table Redipe
+recipe_maker.crafting_table=Crafting Table Recipe
 recipe_maker.furnace=Furnace Recipe
 
 btn.basic_mode=Basic Mode
 btn.advanced_mode=Advanced Mode
 btn.generate=Generate
 
-msg.open_recipemakergui_fail=Fail to create recipe for this block.
-msg.generate_fail=Fail to generate script.
+msg.open_recipemakergui_fail=Failed to create recipe for this block.
+msg.generate_fail=Failed to generate script.
 msg.generate_success=The generated script has been copied to your clipboard.
 
 txt.unfinished_function=Not available yet XD
